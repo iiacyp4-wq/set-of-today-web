@@ -22,6 +22,9 @@
       html,
       body {
         height: 100%;
+        /* 아이폰 홈 화면 앱(상태바 반투명 모드)은 100%를 "화면 − 상태바"로 잘못 계산해 바닥에 상태바 높이만큼
+           빈 띠가 남는다 (2026-10-03, v1.6). 보이는 화면 높이(dvh)로 지정하면 화면 끝까지 꽉 찬다. */
+        height: 100dvh;
         /* 앱 배경색 — 로딩 중·고무줄 스크롤 때 흰 화면이 번쩍이지 않게 */
         background-color: #161a25;
       }
@@ -80,6 +83,6 @@
         document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
       })();
     </script>
-  <script src="/set-of-today-web/_expo/static/js/web/entry-aef489af33c9b6885ee175573d5b3a07.js" defer></script>
+  <script src="/set-of-today-web/_expo/static/js/web/entry-fcc0170355c37f5007977b7deec76a6d.js" defer></script>
 </body>
 </html>
