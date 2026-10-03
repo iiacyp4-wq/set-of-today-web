@@ -3,18 +3,34 @@
   <head>
     <meta charset="utf-8" />
     <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- viewport-fit=cover: 홈 화면 앱(전체 화면)에서 노치·홈 인디케이터 영역까지 그리고, 안전영역은 앱이 env()로 읽어 비운다 (2026-10-03) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no" />
     <title>Set of Today</title>
+
+    <!-- 사파리 "홈 화면에 추가" 설정: 주소창 없는 전체 화면 앱으로 열린다 -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Set of Today" />
+    <meta name="theme-color" content="#161A25" />
+    <link rel="apple-touch-icon" href="/set-of-today-web/apple-touch-icon.png" />
+    <link rel="manifest" href="/set-of-today-web/manifest.webmanifest" />
+
     <!-- The `react-native-web` recommended style reset: https://necolas.github.io/react-native-web/docs/setup/#root-element -->
     <style id="expo-reset">
       /* These styles make the body full-height */
       html,
       body {
         height: 100%;
+        /* 앱 배경색 — 로딩 중·고무줄 스크롤 때 흰 화면이 번쩍이지 않게 */
+        background-color: #161a25;
       }
       /* These styles disable body scrolling if you are using <ScrollView> */
       body {
         overflow: hidden;
+        /* 홈 화면 앱에서 화면 전체가 튕기듯 끌리는 것 방지 */
+        overscroll-behavior: none;
+        -webkit-touch-callout: none;
       }
       /* These styles make the root element full-height */
       #root {
@@ -32,6 +48,6 @@
     </noscript>
     <!-- The root element for your Expo app. -->
     <div id="root"></div>
-  <script src="/set-of-today-web/_expo/static/js/web/entry-c8e2064524ff74e376a8f038a575a1e5.js" defer></script>
+  <script src="/set-of-today-web/_expo/static/js/web/entry-c89d4538e478a00d9c2514200d4c8278.js" defer></script>
 </body>
 </html>
