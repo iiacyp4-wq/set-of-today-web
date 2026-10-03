@@ -48,6 +48,38 @@
     </noscript>
     <!-- The root element for your Expo app. -->
     <div id="root"></div>
-  <script src="/set-of-today-web/_expo/static/js/web/entry-bab88472f7cb57888dfdf0df84db9c6e.js" defer></script>
+
+    <!-- 새 버전 자동 반영 (2026-10-03): 깃허브 페이지가 index.html을 10분 캐시하고, 홈 화면 앱은 페이지를
+         오래 붙들고 있어서 새로 배포해도 폰에 안 바뀌던 문제. 열릴 때·다시 앞으로 올 때마다 서버의
+         index.html을 캐시 없이 받아 번들 파일 이름이 다르면 한 번 새로고침한다. -->
+    <script>
+      (function () {
+        var BASE = '/set-of-today-web/';
+        var LAST_KEY = 'sot-reload-at';
+        function currentEntry() {
+          var el = document.querySelector('script[src*="/entry-"]');
+          var m = el && el.getAttribute('src').match(/entry-[a-f0-9]+\.js/);
+          return m ? m[0] : null;
+        }
+        function check() {
+          var cur = currentEntry();
+          if (!cur || !navigator.onLine) return;
+          fetch(BASE + 'index.html?_=' + Date.now(), { cache: 'no-store' })
+            .then(function (r) { return r.ok ? r.text() : ''; })
+            .then(function (html) {
+              var m = html.match(/entry-[a-f0-9]+\.js/);
+              if (!m || m[0] === cur) return;
+              var last = Number(sessionStorage.getItem(LAST_KEY) || 0);
+              if (Date.now() - last < 60000) return; // 1분 안에 두 번 새로고침하지 않음 (루프 방지)
+              sessionStorage.setItem(LAST_KEY, String(Date.now()));
+              location.replace(BASE + '?r=' + Date.now());
+            })
+            .catch(function () {});
+        }
+        window.addEventListener('load', check);
+        document.addEventListener('visibilitychange', function () { if (!document.hidden) check(); });
+      })();
+    </script>
+  <script src="/set-of-today-web/_expo/static/js/web/entry-9cfdf65989dec59718343391b78ef40e.js" defer></script>
 </body>
 </html>
